@@ -1,5 +1,6 @@
 package br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.facade;
 
+import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.request.AtualizaDivisoesRequest;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.request.CriacaoDivisoesRequest;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.request.DeleteDivisoesRequest;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.response.DivisoesResponse;
@@ -59,6 +60,18 @@ public class DivisoesFacade {
             });
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Não foi possível deletar a divisão - Erro : " + e.toString());
+        }
+    }
+
+    public void putDivisoes(AtualizaDivisoesRequest divisaoRequest) {
+        try {
+            divisaoRequest.getDivisao().stream().forEach(divisaoAtualizada -> {
+                DivisoesModel divisao = divisoesRepository.findById(divisaoAtualizada.getId()).get();
+                divisao.setNomeDivisao(divisaoAtualizada.getNomeDivisao());
+                divisoesRepository.save(divisao);
+            });
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Não foi possível alterar a divisão - Erro : " + e.toString());
         }
     }
 }
