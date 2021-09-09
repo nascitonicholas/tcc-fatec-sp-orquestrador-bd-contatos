@@ -20,8 +20,8 @@ public class DivisoesModel {
 	@Column(name = "nome_divisao")
 	private String nomeDivisao;
 	@Column(name = "dt_criacao")
-	private LocalDate dataCriacao;
+	private String dataCriacao;
 	@Column(name = "dt_ultima_alteracao")
-	private LocalDate dataUltimaAlteracao;
+	private String dataUltimaAlteracao;
 
 }

@@ -4,6 +4,7 @@ import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.request.Atualiza
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.request.CriacaoDivisoesRequest;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.request.DeleteDivisoesRequest;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.response.DivisoesResponse;
+import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.enums.MensagensErrosEnum;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.mapper.DivisoesMapper;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.model.DivisoesModel;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.repository.DivisoesRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public class DivisoesFacade {
@@ -34,7 +36,7 @@ public class DivisoesFacade {
 
             return divisoesMapper.mapDivisaoModelToDivisaoResponse(divisao);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dados não encontrados - Erro : " + e.toString());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, MensagensErrosEnum.MESSAGE_ERROR_FIND.getMessage() + e.toString());
         }
     }
 
@@ -47,31 +49,34 @@ public class DivisoesFacade {
                 }
             });
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Não foi possível salvar a divisão - Erro : " + e.toString());
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, MensagensErrosEnum.MESSAGE_ERROR_CREATE.getMessage() + e.toString());
         }
     }
 
     public void deleteDivisoes(DeleteDivisoesRequest divisaoRequest) {
         try {
-            divisaoRequest.getDivisao().stream().forEach(divisao -> {
-                if(Objects.nonNull(divisao.getId())) {
-                    divisoesRepository.deleteById(divisao.getId());
+            divisaoRequest.getDivisao().stream().forEach(item -> {
+                Optional<DivisoesModel> divisao = divisoesRepository.findById(item.getId());
+                if(divisao.isPresent()) {
+                    divisoesRepository.deleteById(item.getId());
                 }
             });
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Não foi possível deletar a divisão - Erro : " + e.toString());
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, MensagensErrosEnum.MESSAGE_ERROR_DELETE.getMessage() + e.toString());
         }
     }
 
     public void putDivisoes(AtualizaDivisoesRequest divisaoRequest) {
         try {
             divisaoRequest.getDivisao().stream().forEach(divisaoAtualizada -> {
-                DivisoesModel divisao = divisoesRepository.findById(divisaoAtualizada.getId()).get();
-                divisao.setNomeDivisao(divisaoAtualizada.getNomeDivisao());
-                divisoesRepository.save(divisao);
+                Optional<DivisoesModel> divisao = divisoesRepository.findById(divisaoAtualizada.getId());
+                if(divisao.isPresent()) {
+                    divisao.get().setNomeDivisao(divisaoAtualizada.getNomeDivisao());
+                    divisoesRepository.save(divisao.get());
+                }
             });
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Não foi possível alterar a divisão - Erro : " + e.toString());
+            throw  new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, MensagensErrosEnum.MESSAGE_ERROR_UPDATE.getMessage() + e.toString());
         }
     }
 }

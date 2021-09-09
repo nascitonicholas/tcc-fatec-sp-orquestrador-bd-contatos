@@ -15,13 +15,13 @@ public class SecoesModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_secoes")
+    @Column(name = "id_secao")
     private Long id;
     @Column(name = "nome_secao")
     private String nomeSecao;
     @Column(name = "dt_criacao")
-    private LocalDate dataCriacao;
+    private String dataCriacao;
     @Column(name = "dt_ultima_alteracao")
-    private LocalDate dataUltimaAlteracao;
+    private String dataUltimaAlteracao;
 
 }
