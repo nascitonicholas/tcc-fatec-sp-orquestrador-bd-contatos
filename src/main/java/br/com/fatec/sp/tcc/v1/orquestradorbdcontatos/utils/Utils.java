@@ -11,8 +11,5 @@ public class Utils {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATA_FORMATO));
     }
 
-    public static void main(String[] args) {
-        System.out.println(buscaDataAtual());
-    }
 }
 
