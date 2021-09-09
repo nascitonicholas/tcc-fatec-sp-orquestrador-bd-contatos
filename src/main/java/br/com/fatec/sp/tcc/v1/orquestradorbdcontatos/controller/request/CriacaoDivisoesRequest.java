@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DivisoesRequest {
+public class CriacaoDivisoesRequest {
 
     @JsonProperty("lista_divisoes")
     private List<DivisaoRequest> divisao;

@@ -1,6 +1,6 @@
 package br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.mapper;
 
-import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.request.DivisoesRequest;
+import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.request.CriacaoDivisoesRequest;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.response.DivisoesResponse;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.model.DivisoesModel;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.utils.Utils;
@@ -34,5 +34,5 @@ public interface DivisoesMapper {
             @Mapping(target = "dataCriacao", expression = "java(Utils.buscaDataAtual())"),
             @Mapping(target = "dataUltimaAlteracao", expression = "java(Utils.buscaDataAtual())"),
     })
-    DivisoesModel mapDivisaoEntradaToDivisaoModel(DivisoesRequest.DivisaoRequest divisao);
+    DivisoesModel mapDivisaoEntradaToDivisaoModel(CriacaoDivisoesRequest.DivisaoRequest divisao);
 }
