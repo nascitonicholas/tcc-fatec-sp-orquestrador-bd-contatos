@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +26,12 @@ public class DivisoesController implements AbstractController<SaidaDefault> {
     @GetMapping
     public ResponseEntity<?> getDivisoes() {
         List<DivisoesResponse> response = divisoesFacade.getDivisoes();
+        return saidaSimplificada(SaidaDefault.builder().responseBody(response).message(MESSAGE_SUCESSO).build(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id_divisao}")
+    public ResponseEntity<?> getDivisoesById(@PathVariable("id_divisao") Long id) {
+        DivisoesResponse response = divisoesFacade.getDivisoesById(id);
         return saidaSimplificada(SaidaDefault.builder().responseBody(response).message(MESSAGE_SUCESSO).build(), HttpStatus.OK);
     }
 
