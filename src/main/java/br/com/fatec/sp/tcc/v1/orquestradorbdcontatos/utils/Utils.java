@@ -2,6 +2,7 @@ package br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Utils {
 
@@ -9,6 +10,10 @@ public class Utils {
 
     public static String buscaDataAtual() {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATA_FORMATO));
+    }
+
+    public static String upperCase(String value) {
+        return value.toUpperCase();
     }
 
 }

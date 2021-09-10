@@ -33,6 +33,7 @@ public interface DivisoesMapper {
     @Mappings({
             @Mapping(target = "dataCriacao", expression = "java(Utils.buscaDataAtual())"),
             @Mapping(target = "dataUltimaAlteracao", expression = "java(Utils.buscaDataAtual())"),
+            @Mapping(target = "nomeDivisao", expression = "java(Utils.upperCase(divisao.getNomeDivisao()))"),
     })
     DivisoesModel mapDivisaoEntradaToDivisaoModel(CriacaoDivisoesRequest.DivisaoRequest divisao);
 
