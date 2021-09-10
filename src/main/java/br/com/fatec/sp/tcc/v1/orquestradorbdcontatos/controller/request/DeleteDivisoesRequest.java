@@ -18,7 +18,7 @@ public class DeleteDivisoesRequest {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public class DivisaoRequest {
+    public static class DivisaoRequest {
 
         @JsonProperty("id_divisao")
         private Long id;

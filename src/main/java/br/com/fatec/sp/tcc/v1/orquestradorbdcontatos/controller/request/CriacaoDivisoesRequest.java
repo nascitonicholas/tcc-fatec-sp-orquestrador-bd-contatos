@@ -18,7 +18,7 @@ public class CriacaoDivisoesRequest {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public class DivisaoRequest {
+    public static class DivisaoRequest {
 
         @JsonProperty("nome_divisao")
         private String nomeDivisao;

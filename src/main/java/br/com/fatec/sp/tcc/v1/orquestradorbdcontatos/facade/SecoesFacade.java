@@ -17,13 +17,15 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 
+import org.mapstruct.factory.Mappers;
+
 @Component
 public class SecoesFacade {
 
     @Autowired
     private SecoesRepository secoesRepository;
 
-    private SecoesMapper mapper;
+    private SecoesMapper mapper = Mappers.getMapper(SecoesMapper.class);
 
     public List<SecoesResponse> get() {
         List<SecoesModel> listaSecoes = secoesRepository.findAll();

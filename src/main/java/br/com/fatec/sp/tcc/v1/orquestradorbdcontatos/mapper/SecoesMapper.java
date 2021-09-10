@@ -5,6 +5,7 @@ import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.model.SecoesModel;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.utils.Utils;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 import org.mapstruct.Named;
 
 import java.util.ArrayList;
@@ -14,7 +15,11 @@ import java.util.Objects;
 @Mapper(imports = {Utils.class})
 public interface SecoesMapper {
 
-    @Mapping(target = "nomeSecao", expression = "java(Utils.upperCase(nome))")
+    @Mappings({
+        @Mapping(target = "nomeSecao", expression = "java(Utils.upperCase(nome))"),
+        @Mapping(target = "dataCriacao", expression = "java(Utils.buscaDataAtual())"),
+        @Mapping(target = "dataUltimaAlteracao", expression = "java(Utils.buscaDataAtual())"),
+    })
     SecoesModel mapNomeToSecoesModel(String nome);
 
     SecoesResponse mapSecoesModelToSecoesResponse(SecoesModel secao);

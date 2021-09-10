@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -13,12 +14,12 @@ import java.util.List;
 public class CriacaoSecoesRequest {
 
     @JsonProperty("lista_secoes")
-    private List<Request> request;
+    private List<Request> request = new ArrayList<>();
 
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public class Request {
+    public static class Request {
 
         @JsonProperty("nome_secao")
         private String nomeSecao;

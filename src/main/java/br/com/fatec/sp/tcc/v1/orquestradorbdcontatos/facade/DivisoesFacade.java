@@ -13,8 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
+import org.mapstruct.factory.Mappers;
 
 @Component
 public class DivisoesFacade {
@@ -22,7 +23,7 @@ public class DivisoesFacade {
     @Autowired
     private DivisoesRepository divisoesRepository;
 
-    private DivisoesMapper divisoesMapper;
+    private DivisoesMapper divisoesMapper = Mappers.getMapper(DivisoesMapper.class);
 
     public List<DivisoesResponse> getDivisoes() {
         List<DivisoesModel> listaDivisoes = divisoesRepository.findAll();

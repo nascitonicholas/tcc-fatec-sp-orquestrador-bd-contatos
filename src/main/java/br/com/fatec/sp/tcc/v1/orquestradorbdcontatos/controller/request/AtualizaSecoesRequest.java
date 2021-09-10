@@ -18,7 +18,7 @@ public class AtualizaSecoesRequest {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public class Request {
+    public static class Request {
 
         @JsonProperty("id_secao")
         private Long id;
