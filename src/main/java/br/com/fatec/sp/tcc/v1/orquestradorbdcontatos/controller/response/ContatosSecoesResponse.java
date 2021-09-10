@@ -8,22 +8,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContatosResponse {
+public class ContatosSecoesResponse {
 
-    @JsonProperty("id_contato")
+    @JsonProperty("id_secao")
     private Long id;
-    @JsonProperty("divisao")
-    private ContatosDivisoesResponse divisoesModel;
-    @JsonProperty("secao")
-    private ContatosSecoesResponse secoesModel;
-    @JsonProperty("telefone")
-    private String telefone;
-    @JsonProperty("email")
-    private String email;
+    @JsonProperty("nome_secao")
+    private String nomeSecao;
     @JsonProperty("data_criacao")
     private String dataCriacao;
     @JsonProperty("data_ultima_alteracao")
     private String dataUltimaAlteracao;
-
 
 }
