@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,8 +15,8 @@ public class SecoesResponse {
     @JsonProperty("nome_secao")
     private String nomeSecao;
     @JsonProperty("data_criacao")
-    private LocalDate dataCriacao;
+    private String dataCriacao;
     @JsonProperty("data_ultima_alteracao")
-    private LocalDate dataUltimaAlteracao;
+    private String dataUltimaAlteracao;
 
 }

@@ -29,7 +29,7 @@ public class SecoesController implements AbstractController<SaidaDefault> {
     }
 
     @GetMapping("/{id_secao}")
-    public ResponseEntity<?> getById(@PathVariable("id_divisao") Long id) {
+    public ResponseEntity<?> getById(@PathVariable("id_secao") Long id) {
         SecoesResponse response = secoesFacade.getById(id);
         return saidaSimplificada(SaidaDefault.builder().responseBody(response).message(MESSAGE_SUCESSO_ID.getMessage()).build(), HttpStatus.OK);
     }

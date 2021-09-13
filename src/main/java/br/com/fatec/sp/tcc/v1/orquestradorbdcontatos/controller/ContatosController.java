@@ -29,8 +29,8 @@ public class ContatosController implements AbstractController<SaidaDefault> {
         return saidaSimplificada(SaidaDefault.builder().responseBody(response).message(MESSAGE_SUCESSO_LISTA.getMessage()).build(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id_secao}")
-    public ResponseEntity<?> getById(@PathVariable("id_divisao") Long id) {
+    @GetMapping("/{id_contato}")
+    public ResponseEntity<?> getById(@PathVariable("id_contato") Long id) {
         ContatosResponse response = contatosFacade.getById(id);
         return saidaSimplificada(SaidaDefault.builder().responseBody(response).message(MESSAGE_SUCESSO_ID.getMessage()).build(), HttpStatus.OK);
     }

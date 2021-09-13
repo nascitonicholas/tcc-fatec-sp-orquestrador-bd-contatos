@@ -20,13 +20,10 @@ public class CriacaoContatosRequest {
     @AllArgsConstructor
     public static class Request {
 
-        @JsonProperty("id_contato")
-        private Long id;
-
-        @JsonProperty("id_nova_divisao")
+        @JsonProperty("id_divisao")
         private Long idDivisao;
 
-        @JsonProperty("id_nova_secao")
+        @JsonProperty("id_secao")
         private Long idSecao;
 
         @JsonProperty("telefone")

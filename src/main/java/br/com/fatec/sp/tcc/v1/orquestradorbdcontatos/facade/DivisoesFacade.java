@@ -8,6 +8,7 @@ import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.enums.MensagensErrosEnum;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.mapper.DivisoesMapper;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.model.DivisoesModel;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.repository.DivisoesRepository;
+import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -44,7 +45,7 @@ public class DivisoesFacade {
     public void postDivisoes(CriacaoDivisoesRequest divisaoRequest) {
         try {
             divisaoRequest.getDivisao().stream().forEach(divisao -> {
-                if(divisao.getNomeDivisao().isBlank()) {
+                if(!divisao.getNomeDivisao().isBlank()) {
                     DivisoesModel divisaoModel = divisoesMapper.mapDivisaoEntradaToDivisaoModel(divisao);
                     divisoesRepository.save(divisaoModel);
                 }
@@ -73,6 +74,7 @@ public class DivisoesFacade {
                 Optional<DivisoesModel> divisao = divisoesRepository.findById(divisaoAtualizada.getId());
                 if(divisao.isPresent()) {
                     divisao.get().setNomeDivisao(divisaoAtualizada.getNomeDivisao());
+                    divisao.get().setDataUltimaAlteracao(Utils.buscaDataAtual());
                     divisoesRepository.save(divisao.get());
                 }
             });

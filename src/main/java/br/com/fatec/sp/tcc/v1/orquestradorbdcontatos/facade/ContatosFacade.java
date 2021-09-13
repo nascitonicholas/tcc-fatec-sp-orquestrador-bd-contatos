@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -71,8 +72,14 @@ public class ContatosFacade {
     public void post(CriacaoContatosRequest contatosRequest) {
         try {
             contatosRequest.getRequest().forEach(item -> {
-                ContatosModel contato = mapper.mapContatosRequestToContatosModel(item);
-                contatosRepository.save(contato);
+                Optional<DivisoesModel> divisao = divisoesRepository.findById(item.getIdDivisao());
+                Optional<SecoesModel> secao = secoesRepository.findById(item.getIdSecao());
+                if(Objects.nonNull(item) && divisao.isPresent() && secao.isPresent()){
+                    ContatosModel contato = mapper.mapContatosRequestToContatosModel(item);
+                    contato.setDivisoesModel(divisao.get());
+                    contato.setSecoesModel(secao.get());
+                    contatosRepository.save(contato);
+                }
             });
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, MensagensErrosEnum.MESSAGE_ERROR_CREATE.getMessage() + e.toString());
