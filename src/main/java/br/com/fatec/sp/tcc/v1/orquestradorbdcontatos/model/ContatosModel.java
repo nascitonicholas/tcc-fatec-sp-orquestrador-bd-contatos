@@ -28,8 +28,8 @@ public class ContatosModel {
     @Column(name = "email")
     private String email;
     @Column(name = "dt_criacao")
-    private LocalDate dataCriacao;
+    private String dataCriacao;
     @Column(name = "dt_ultima_alteracao")
-    private LocalDate dataUltimaAlteracao;
+    private String dataUltimaAlteracao;
 
 }

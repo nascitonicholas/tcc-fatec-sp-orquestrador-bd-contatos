@@ -5,24 +5,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeleteDivisoesRequest {
+public class CriacaoSecoesRequest {
 
-    @JsonProperty("lista_divisoes")
-    private List<DivisaoRequest> divisao;
+    @JsonProperty("lista_secoes")
+    private List<Request> request = new ArrayList<>();
 
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class DivisaoRequest {
+    public static class Request {
 
-        @JsonProperty("id_divisao")
-        private Long id;
+        @JsonProperty("nome_secao")
+        private String nomeSecao;
 
     }
-
 }
