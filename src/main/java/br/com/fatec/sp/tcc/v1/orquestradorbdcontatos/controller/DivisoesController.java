@@ -2,6 +2,7 @@ package br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller;
 
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.config.AbstractController;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.config.SaidaDefault;
+import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.request.AtualizaDivisoesRequest;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.request.CriacaoDivisoesRequest;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.request.DeleteDivisoesRequest;
 import br.com.fatec.sp.tcc.v1.orquestradorbdcontatos.controller.response.DivisoesResponse;
@@ -19,7 +20,9 @@ public class DivisoesController implements AbstractController<SaidaDefault> {
 
     private final String MESSAGE_SUCESSO = "Divisões retornadas com sucesso.";
     private final String MESSAGE_SUCESSO_ID = "Divisão encontrada com sucesso.";
+    private final String MESSAGE_SUCESSO_ATUALIZACAO = "Divisões atualizadas com sucesso.";
     private final String MESSAGE_SUCESSO_CRIACAO = "Divisões cadastradas com sucesso.";
+    private final String MESSAGE_SUCESSO_DELETADAS = "Divisões deletadas com sucesso.";
 
     @Autowired
     private DivisoesFacade divisoesFacade;
@@ -36,6 +39,12 @@ public class DivisoesController implements AbstractController<SaidaDefault> {
         return saidaSimplificada(SaidaDefault.builder().responseBody(response).message(MESSAGE_SUCESSO_ID).build(), HttpStatus.OK);
     }
 
+    @PutMapping
+    public ResponseEntity<?> putDivisoes(@RequestBody AtualizaDivisoesRequest divisaoRequest) {
+        divisoesFacade.putDivisoes(divisaoRequest);
+        return saidaSimplificada(SaidaDefault.builder().message(MESSAGE_SUCESSO_ATUALIZACAO).build(), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> postDivisoes(@RequestBody CriacaoDivisoesRequest divisaoRequest) {
         divisoesFacade.postDivisoes(divisaoRequest);
@@ -45,7 +54,7 @@ public class DivisoesController implements AbstractController<SaidaDefault> {
     @DeleteMapping
     public ResponseEntity<?> deleteDivisoes(@RequestBody DeleteDivisoesRequest divisaoRequest) {
         divisoesFacade.deleteDivisoes(divisaoRequest);
-        return saidaSimplificada(SaidaDefault.builder().message(MESSAGE_SUCESSO_CRIACAO).build(), HttpStatus.NO_CONTENT);
+        return saidaSimplificada(SaidaDefault.builder().message(MESSAGE_SUCESSO_DELETADAS).build(), HttpStatus.NO_CONTENT);
     }
 
 }

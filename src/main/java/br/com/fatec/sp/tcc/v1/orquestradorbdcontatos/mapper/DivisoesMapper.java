@@ -35,4 +35,5 @@ public interface DivisoesMapper {
             @Mapping(target = "dataUltimaAlteracao", expression = "java(Utils.buscaDataAtual())"),
     })
     DivisoesModel mapDivisaoEntradaToDivisaoModel(CriacaoDivisoesRequest.DivisaoRequest divisao);
+
 }
